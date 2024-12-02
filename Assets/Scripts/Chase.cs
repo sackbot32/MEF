@@ -26,7 +26,7 @@ public class Chase : State
     {
         if (CheckPlayerInLineOfSight(60f) && CheckPlayerIsNear(5f))
         {
-            //nextState = new Attack(npc, agent, anim, player);
+            nextState = new Attack(npc, agent, anim, player);
             Debug.Log("Attaaack");
             base.Exit();
         } else
