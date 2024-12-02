@@ -27,6 +27,7 @@ public class Attack : State
     public override void Update()
     {
         currentTime += Time.deltaTime;
+        npc.transform.LookAt(new Vector3(player.position.x,0, player.position.z));
         if(currentTime > animationDuration)
         {
             nextState = new Chase(npc, agent, anim, player);
