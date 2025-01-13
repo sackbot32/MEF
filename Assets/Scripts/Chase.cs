@@ -15,6 +15,7 @@ public class Chase : State
 
     public override void Enter()
     {
+        Debug.Log("Chase");
         anim.SetTrigger("isRunning");
         agent.speed = 4f;
         agent.isStopped = false;
@@ -34,6 +35,10 @@ public class Chase : State
             if (CheckPlayerInLineOfSight(60f) && CheckPlayerIsNear(15f))
             {
                 agent.SetDestination(player.position);
+            } else
+            {
+                nextState = new LookLastPoint(npc, agent, anim, player);
+                base.Exit();
             }
         }
     }

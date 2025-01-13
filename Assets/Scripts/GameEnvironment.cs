@@ -9,9 +9,11 @@ public sealed class GameEnvironment
 
     // Create a list of game objects called 'checkpoints'
     private List<GameObject> checkpoints = new List<GameObject>();
+    private List<Transform> hidePoints = new List<Transform>();
 
     // Create public reference for retrieving checkpoints list.
     public List<GameObject> Checkpoints { get { return checkpoints; } }
+    public List<Transform> HidePoints { get { return hidePoints; } }
 
     // Create singleton if it doesn't already exist and populate list with any objects found with tag set to "Checkpoint".
     public static GameEnvironment Singleton
@@ -23,6 +25,10 @@ public sealed class GameEnvironment
                 instance = new GameEnvironment();
                 instance.Checkpoints.AddRange(
                     GameObject.FindGameObjectsWithTag("Checkpoint"));
+                foreach (GameObject item in GameObject.FindGameObjectsWithTag("Hide"))
+                {
+                    instance.hidePoints.Add(item.transform);
+                }
             }
             return instance;
         }

@@ -8,7 +8,7 @@ public class State
     // Diferentes estados en los que puede estar el NPC.
     public enum STATE
     {
-        IDLE, PATROL, CHASE, ATTACK, SLEEP
+        IDLE, PATROL, CHASE, ATTACK, HIDE,LOOK
     };
 
     // Fase en la que se encuentra el estado.
@@ -76,6 +76,21 @@ public class State
             isInAngle = true;
         }
         return isInAngle;
+    }
+
+    protected bool CheckPlayerBehind(float detectionDistance,float dotArea)
+    {
+        bool isBehind = false;
+        if(Vector3.Distance(player.position,npc.transform.position) < detectionDistance)
+        {
+            Vector3 playerDir = player.position - npc.transform.position;
+            
+            if(Vector3.Dot(playerDir, agent.transform.forward) < -Mathf.Abs(dotArea))
+            {
+                isBehind = true;
+            }
+        }
+        return isBehind;
     }
 }
 

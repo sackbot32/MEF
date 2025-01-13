@@ -15,6 +15,7 @@ public class Attack : State
 
     public override void Enter()
     {
+        Debug.Log("Attack");
         anim.SetTrigger("isShooting");
         animationDuration = anim.GetCurrentAnimatorStateInfo(0).length;
         currentTime = 0f;
@@ -27,7 +28,7 @@ public class Attack : State
     public override void Update()
     {
         currentTime += Time.deltaTime;
-        npc.transform.LookAt(new Vector3(player.position.x,0, player.position.z));
+        //npc.transform.LookAt(new Vector3(player.position.x,0, player.position.z));
         if(currentTime > animationDuration)
         {
             nextState = new Chase(npc, agent, anim, player);

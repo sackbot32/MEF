@@ -14,6 +14,7 @@ public class Idle : State
 
     public override void Enter()
     {
+        Debug.Log("Idle");
         randomTime = Random.Range(1f, 3f);
         timePassed = 0;
         anim.SetTrigger("isIdle");

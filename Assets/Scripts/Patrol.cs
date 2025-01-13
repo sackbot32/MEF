@@ -13,6 +13,7 @@ public class Patrol : State
 
     public override void Enter()
     {
+        Debug.Log("Patrol");
         anim.SetTrigger("isWalking");
         agent.speed = 3f;
         agent.isStopped = false;
@@ -32,9 +33,19 @@ public class Patrol : State
             }
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentPoint].transform.position);
         }
+        if (CheckPlayerBehind(5f, 0.5f))
+        {
+            nextState = new Hide(npc,agent,anim,player);
+            base.Exit();
+        }
         if(CheckPlayerInLineOfSight(60f) && CheckPlayerIsNear(15f))
         {
             nextState = new Chase(npc, agent, anim, player);
+            base.Exit();
+        }
+        if (CheckPlayerInLineOfSight(60f) && CheckPlayerIsNear(5f))
+        {
+            nextState = new Hide(npc, agent, anim, player);
             base.Exit();
         }
     }
